@@ -121,6 +121,11 @@ input {
   color: var(--primary-800);
 }
 
+.percent[selected="true"] {
+  background-color: var(--primary-400);
+  color: var(--primary-800);
+}
+
 #custom-percent {
   background: var(--accent-100);
   color: var(--primary-800);
