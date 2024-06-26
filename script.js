@@ -21,7 +21,7 @@ fivePercent.addEventListener("click", () => {
     .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
     fivePercent.setAttribute("selected", "true");
     tipPercent=5;
-    let custom = "false";
+    custom = "false";
     tipAmount.innerHTML = "$" + calculateTip();
     totalAmount.innerHTML = "$" + calculateTotal();
 });
@@ -31,7 +31,7 @@ tenPercent.addEventListener("click", () => {
     .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
     tenPercent.setAttribute("selected", "true");
     tipPercent = 10;
-    let custom = "false";
+    custom = "false";
     tipAmount.innerHTML = "$" + calculateTip();
     totalAmount.innerHTML = "$" + calculateTotal();
 });
@@ -41,7 +41,7 @@ fifteenPercent.addEventListener("click", () => {
     .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
     fifteenPercent.setAttribute("selected", "true");
     tipPercent = 15;
-    let custom = "false";
+    custom = "false";
     tipAmount.innerHTML = "$" + calculateTip();
     totalAmount.innerHTML = "$" + calculateTotal();
 });
@@ -51,7 +51,7 @@ twentyPercent.addEventListener("click", () => {
     .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
     twentyPercent.setAttribute("selected", "true");
     tipPercent = 20;
-    let custom = "false";
+    custom = "false";
     tipAmount.innerHTML = "$" + calculateTip();
     totalAmount.innerHTML = "$" + calculateTotal();
 });
@@ -61,16 +61,32 @@ twentyFivePercent.addEventListener("click", () => {
     .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
     twentyFivePercent.setAttribute("selected", "true");
     tipPercent = 25;
-    let custom = "false";
+    custom = "false";
     tipAmount.innerHTML = "$" + calculateTip();
     totalAmount.innerHTML = "$" + calculateTotal();
 });
+
+customTip.addEventListener("change", () => {
+    document.querySelectorAll('.percent[selected="true"]')
+    .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
+    customTip.setAttribute("selected","true");
+    custom = "true";
+    customTipAmount = parseFloat(customTip.value);
+    console.log("Custom TIp is " + customTipAmount);
+    tipAmount.innerHTML = "$" + calculateTip();
+    totalAmount.innerHTML = "$" + calculateTotal();
+});
+
 
 customTip.addEventListener("click", () => {
     document.querySelectorAll('.percent[selected="true"]')
     .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
     customTip.setAttribute("selected","true");
     custom = "true";
+    customTipAmount = parseFloat(customTip.value);
+    console.log("Custom TIp is " + customTipAmount);
+    tipAmount.innerHTML = "$" + calculateTip();
+    totalAmount.innerHTML = "$" + calculateTotal();
 });
 
 
@@ -80,21 +96,25 @@ customTip.addEventListener("click", () => {
 function calculateTip()  {
     total = parseFloat(document.getElementById("total").value);
     numPeople = parseFloat(document.getElementById("num-people").value);
-    if (custom === "true") {return custom / numPeople };
+    if (custom === "true") {
+        customTipAmount = parseFloat(customTip.value);
+         return customTipAmount / numPeople;
+        };
+    console.log("custom is false");
     console.log("CalculateTip is Running");
-    if (total != 0 && tipPercent !=0 && numPeople != 0) {
+    if (total  && tipPercent && numPeople) {
         console.log(total);
         console.log(tipPercent);
         console.log(numPeople);
         console.log("if statement was true");
         console.log(total * (tipPercent / 100) / numPeople);
-        return  total * (tipPercent / 100) / numPeople;
+        return Math.round(total * (tipPercent / 100) / numPeople * 100)/100;
     }
     else return null;
 };
 
 function calculateTotal() {
-    return (total + calculateTip() ) / numPeople;
+    return Math.round(((total/numPeople) + calculateTip())*100)/100; 
 }
 
 document.getElementById("total").addEventListener("change", () => {

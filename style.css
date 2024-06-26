@@ -73,7 +73,7 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     position: absolute;
     margin-top: 20vh;
-    height: 50vh;
+    height: fit-content;
     width: min(700px, 80%);
     border-radius: 3%;
     place-items: center;
@@ -114,6 +114,7 @@ input {
   border: none;
   border-radius: 5px;
   padding: 5px;
+  cursor: pointer;
 }
 
 .percent:hover, .percent:focus {
@@ -227,6 +228,12 @@ input {
     color: var(--primary-800);
     border: none;
     border-radius: 5px;
+    cursor: pointer;
+}
+
+#reset:hover, #reset:focus {
+  background-color: hsl(172, 67%, 65%);
+  color: var(--primary-800); 
 }
 
 
