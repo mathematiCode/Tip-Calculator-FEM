@@ -134,8 +134,9 @@ input {
   border: none;
 }
 
-#custom-tip:hover, #custom-tip:focus, #custom-tip:active, :-webkit-autofill:focus {
+#custom-tip:hover, #custom-tip:focus, #custom-tip:active {
   border: 2px solid var(--primary-400) !important;
+  outline: none;
 }
 
 

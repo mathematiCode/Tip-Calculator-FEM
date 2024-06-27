@@ -16,19 +16,49 @@ let custom = "false";
 const tipAmount = document.getElementById("variable-tip-amount");
 const totalAmount = document.getElementById("variable-total-amount");
 
+// Setting initial values to display on load
+tipAmount.innerHTML = "$0.00";
+totalAmount.innerHTML = "$0.00";
+
+
+// Math.round rounds numbers to the nearest whole number. So to round to the nearest hundreths place I had to multiply the value by 100, then round it to the nearest whole number and then divide by 100 to shift the place values back to the hundreths place. 
+
+function calculateTip()  {  // Calculates the tip per person
+    total = parseFloat(document.getElementById("total").value); // stores most up to date value for the total bill
+    numPeople = parseFloat(document.getElementById("num-people").value); // stores the most up to date value for numPeople
+    if (custom === "true") { // checks if the user selected a custom tip
+        customTipAmount = parseFloat(customTip.value); 
+         return Math.round(customTipAmount / numPeople*100)/100; // uses the tip as a $ amount not a percent
+        };
+    if (total  && tipPercent && numPeople) { // Checks if all inputs are truthy
+        return Math.round(total * (tipPercent / 100) / numPeople * 100)/100; // uses the tipPercent as a percent
+    }
+    else return 0; // displays $0 if any inputs are falsey
+};
+
+function calculateTotal() { // Calculates the total per person
+    if (total  && tipPercent && numPeople) {
+        return Math.round(((total/numPeople) + calculateTip())*100)/100; 
+    }
+    else return 0; // displays $0 if any inputs are falsey
+}
+
+// Event listeners that ensure that only one tip percent is selected at a time and updates the tip and total 
 fivePercent.addEventListener("click", () => {
     document.querySelectorAll('.percent[selected="true"]')
-    .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
-    fivePercent.setAttribute("selected", "true");
-    tipPercent=5;
-    custom = "false";
-    tipAmount.innerHTML = "$" + calculateTip();
-    totalAmount.innerHTML = "$" + calculateTotal();
+    .forEach((currentItem) => currentItem.setAttribute("selected", "false")); // Reverts formatting for all %'s 
+    customTip.value = ""; // Clears custom input field
+    fivePercent.setAttribute("selected", "true"); // Applies formatting to the selected button
+    tipPercent=5; // Sets the percent so the tip and total are calculated correctly
+    custom = "false"; // Ensures that calculateTip uses 5 as the % not a $ amount
+    tipAmount.innerHTML = "$" + calculateTip(); // Updates the tip amount
+    totalAmount.innerHTML = "$" + calculateTotal(); //Updates the total amount
 });
 
 tenPercent.addEventListener("click", () => {
     document.querySelectorAll('.percent[selected="true"]')
     .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
+    customTip.value = "";
     tenPercent.setAttribute("selected", "true");
     tipPercent = 10;
     custom = "false";
@@ -39,6 +69,7 @@ tenPercent.addEventListener("click", () => {
 fifteenPercent.addEventListener("click", () => {
     document.querySelectorAll('.percent[selected="true"]')
     .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
+    customTip.value = "";
     fifteenPercent.setAttribute("selected", "true");
     tipPercent = 15;
     custom = "false";
@@ -49,6 +80,7 @@ fifteenPercent.addEventListener("click", () => {
 twentyPercent.addEventListener("click", () => {
     document.querySelectorAll('.percent[selected="true"]')
     .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
+    customTip.value = "";
     twentyPercent.setAttribute("selected", "true");
     tipPercent = 20;
     custom = "false";
@@ -59,6 +91,7 @@ twentyPercent.addEventListener("click", () => {
 twentyFivePercent.addEventListener("click", () => {
     document.querySelectorAll('.percent[selected="true"]')
     .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
+    customTip.value = "";
     twentyFivePercent.setAttribute("selected", "true");
     tipPercent = 25;
     custom = "false";
@@ -82,40 +115,17 @@ customTip.addEventListener("click", () => {
     document.querySelectorAll('.percent[selected="true"]')
     .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
     customTip.setAttribute("selected","true");
-    custom = "true";
-    customTipAmount = parseFloat(customTip.value);
-    console.log("Custom TIp is " + customTipAmount);
-    tipAmount.innerHTML = "$" + calculateTip();
+});
+
+customTip.addEventListener("change", () => {
+    custom = "true"; // Ensures that the value stored is used as a $ amount not a percent 
+    customTipAmount = parseFloat(customTip.value); // stores tip amount the user input
+    tipAmount.innerHTML = "$" + calculateTip(); 
     totalAmount.innerHTML = "$" + calculateTotal();
 });
 
 
-
-
-
-function calculateTip()  {
-    total = parseFloat(document.getElementById("total").value);
-    numPeople = parseFloat(document.getElementById("num-people").value);
-    if (custom === "true") {
-        customTipAmount = parseFloat(customTip.value);
-         return customTipAmount / numPeople;
-        };
-    console.log("custom is false");
-    console.log("CalculateTip is Running");
-    if (total  && tipPercent && numPeople) {
-        console.log(total);
-        console.log(tipPercent);
-        console.log(numPeople);
-        console.log("if statement was true");
-        console.log(total * (tipPercent / 100) / numPeople);
-        return Math.round(total * (tipPercent / 100) / numPeople * 100)/100;
-    }
-    else return null;
-};
-
-function calculateTotal() {
-    return Math.round(((total/numPeople) + calculateTip())*100)/100; 
-}
+// These event listeners update outputs when any input is changed 
 
 document.getElementById("total").addEventListener("change", () => {
     tipAmount.innerHTML = "$" + calculateTip();
@@ -125,4 +135,16 @@ document.getElementById("total").addEventListener("change", () => {
 document.getElementById("num-people").addEventListener("change", () => {
     tipAmount.innerHTML = "$" + calculateTip();
     totalAmount.innerHTML = "$" + calculateTotal();
+});
+
+
+// This resets all inputs and outputs when the reset button is clicked
+document.getElementById("reset").addEventListener("click", () => {
+    document.getElementById("total").value = "0.00";
+    document.getElementById("num-people").value = "0";
+    document.querySelectorAll('.percent[selected="true"]')
+    .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
+    customTip.value = "";
+    tipAmount.innerHTML = "$0.00";
+    totalAmount.innerHTML = "$0.00";
 });
