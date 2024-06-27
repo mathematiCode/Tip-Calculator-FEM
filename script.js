@@ -26,21 +26,21 @@ totalAmount.innerHTML = "$0.00";
 function calculateTip()  {  // Calculates the tip per person
     total = parseFloat(document.getElementById("total").value); // stores most up to date value for the total bill
     numPeople = parseFloat(document.getElementById("num-people").value); // stores the most up to date value for numPeople
-    if (custom === "true") { // checks if the user selected a custom tip
+    if (custom === "true" && numPeople) { // checks if the user selected a custom tip
         customTipAmount = parseFloat(customTip.value); 
          return Math.round(customTipAmount / numPeople*100)/100; // uses the tip as a $ amount not a percent
         };
     if (total  && tipPercent && numPeople) { // Checks if all inputs are truthy
-        return Math.round(total * (tipPercent / 100) / numPeople * 100)/100; // uses the tipPercent as a percent
+        return (total * (tipPercent / 100) / numPeople); // uses the tipPercent as a percent
     }
-    else return 0; // displays $0 if any inputs are falsey
+    else return 0.00; // displays $0 if any inputs are falsey
 };
 
 function calculateTotal() { // Calculates the total per person
-    if (total  && tipPercent && numPeople) {
-        return Math.round(((total/numPeople) + calculateTip())*100)/100; 
+    if ((total || tipPercent || customTipAmount) && numPeople) {
+        return ((total/numPeople) + calculateTip()); 
     }
-    else return 0; // displays $0 if any inputs are falsey
+    else return 0.00; // displays $0 if any inputs are falsey
 }
 
 // Event listeners that ensure that only one tip percent is selected at a time and updates the tip and total 
@@ -51,8 +51,8 @@ fivePercent.addEventListener("click", () => {
     fivePercent.setAttribute("selected", "true"); // Applies formatting to the selected button
     tipPercent=5; // Sets the percent so the tip and total are calculated correctly
     custom = "false"; // Ensures that calculateTip uses 5 as the % not a $ amount
-    tipAmount.innerHTML = "$" + calculateTip(); // Updates the tip amount
-    totalAmount.innerHTML = "$" + calculateTotal(); //Updates the total amount
+    tipAmount.innerHTML = "$" + (calculateTip().toFixed(2)); // Updates the tip amount
+    totalAmount.innerHTML = "$" + (calculateTotal().toFixed(2)); //Updates the total amount
 });
 
 tenPercent.addEventListener("click", () => {
@@ -62,8 +62,8 @@ tenPercent.addEventListener("click", () => {
     tenPercent.setAttribute("selected", "true");
     tipPercent = 10;
     custom = "false";
-    tipAmount.innerHTML = "$" + calculateTip();
-    totalAmount.innerHTML = "$" + calculateTotal();
+    tipAmount.innerHTML = "$" + (calculateTip().toFixed(2)); // Updates the tip amount
+    totalAmount.innerHTML = "$" + (calculateTotal().toFixed(2)); //Updates the total amount
 });
 
 fifteenPercent.addEventListener("click", () => {
@@ -73,8 +73,8 @@ fifteenPercent.addEventListener("click", () => {
     fifteenPercent.setAttribute("selected", "true");
     tipPercent = 15;
     custom = "false";
-    tipAmount.innerHTML = "$" + calculateTip();
-    totalAmount.innerHTML = "$" + calculateTotal();
+    tipAmount.innerHTML = "$" + (calculateTip().toFixed(2)); // Updates the tip amount
+    totalAmount.innerHTML = "$" + (calculateTotal().toFixed(2)); //Updates the total amount
 });
 
 twentyPercent.addEventListener("click", () => {
@@ -84,8 +84,8 @@ twentyPercent.addEventListener("click", () => {
     twentyPercent.setAttribute("selected", "true");
     tipPercent = 20;
     custom = "false";
-    tipAmount.innerHTML = "$" + calculateTip();
-    totalAmount.innerHTML = "$" + calculateTotal();
+    tipAmount.innerHTML = "$" + (calculateTip().toFixed(2)); // Updates the tip amount
+    totalAmount.innerHTML = "$" + (calculateTotal().toFixed(2)); //Updates the total amount
 });
 
 twentyFivePercent.addEventListener("click", () => {
@@ -95,8 +95,8 @@ twentyFivePercent.addEventListener("click", () => {
     twentyFivePercent.setAttribute("selected", "true");
     tipPercent = 25;
     custom = "false";
-    tipAmount.innerHTML = "$" + calculateTip();
-    totalAmount.innerHTML = "$" + calculateTotal();
+    tipAmount.innerHTML = "$" + (calculateTip().toFixed(2)); // Updates the tip amount
+    totalAmount.innerHTML = "$" + (calculateTotal().toFixed(2)); //Updates the total amount
 });
 
 customTip.addEventListener("change", () => {
@@ -106,8 +106,8 @@ customTip.addEventListener("change", () => {
     custom = "true";
     customTipAmount = parseFloat(customTip.value);
     console.log("Custom TIp is " + customTipAmount);
-    tipAmount.innerHTML = "$" + calculateTip();
-    totalAmount.innerHTML = "$" + calculateTotal();
+    tipAmount.innerHTML = "$" + (calculateTip().toFixed(2)); // Updates the tip amount
+    totalAmount.innerHTML = "$" + (calculateTotal().toFixed(2)); //Updates the total amount
 });
 
 
@@ -120,21 +120,21 @@ customTip.addEventListener("click", () => {
 customTip.addEventListener("change", () => {
     custom = "true"; // Ensures that the value stored is used as a $ amount not a percent 
     customTipAmount = parseFloat(customTip.value); // stores tip amount the user input
-    tipAmount.innerHTML = "$" + calculateTip(); 
-    totalAmount.innerHTML = "$" + calculateTotal();
+    tipAmount.innerHTML = "$" + (calculateTip().toFixed(2)); // Updates the tip amount
+    totalAmount.innerHTML = "$" + (calculateTotal().toFixed(2)); //Updates the total amount
 });
 
 
 // These event listeners update outputs when any input is changed 
 
 document.getElementById("total").addEventListener("change", () => {
-    tipAmount.innerHTML = "$" + calculateTip();
-    totalAmount.innerHTML = "$" + calculateTotal();
+    tipAmount.innerHTML = "$" + (calculateTip().toFixed(2)); // Updates the tip amount
+    totalAmount.innerHTML = "$" + (calculateTotal().toFixed(2)); //Updates the total amount
 });
 
 document.getElementById("num-people").addEventListener("change", () => {
-    tipAmount.innerHTML = "$" + calculateTip();
-    totalAmount.innerHTML = "$" + calculateTotal();
+    tipAmount.innerHTML = "$" + (calculateTip().toFixed(2)); // Updates the tip amount
+    totalAmount.innerHTML = "$" + (calculateTotal().toFixed(2)); //Updates the total amount
 });
 
 
