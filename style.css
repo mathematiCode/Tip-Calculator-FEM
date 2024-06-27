@@ -52,6 +52,7 @@
 
     --primary-400: hsl(172, 67%, 45%);
     --primary-800: hsl(183, 100%, 15%);
+    --primary-200: hsl(172, 67%, 75%);
     --accent-600: hsl(186, 14%, 43%);
     --acent-400: hsl(184, 14%, 56%);
     --accent-200: hsl(185, 41%, 84%);
@@ -118,19 +119,23 @@ input {
 }
 
 .percent:hover, .percent:focus {
-  background-color: var(--primary-400);
+  background-color: var(--primary-200);
   color: var(--primary-800);
 }
 
 .percent[selected="true"] {
-  background-color: var(--primary-400);
+  background-color: var(--primary-200);
   color: var(--primary-800);
 }
 
-#custom-percent {
+#custom-tip {
   background: var(--accent-100);
   color: var(--primary-800);
+  border: none;
+}
 
+#custom-tip:hover, #custom-tip:focus, #custom-tip:active, :-webkit-autofill:focus {
+  border: 2px solid var(--primary-400) !important;
 }
 
 
@@ -232,7 +237,7 @@ input {
 }
 
 #reset:hover, #reset:focus {
-  background-color: hsl(172, 67%, 65%);
+  background-color: var(--primary-200);
   color: var(--primary-800); 
 }
 
