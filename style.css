@@ -68,6 +68,11 @@ body {
     justify-content: center;
 }
 
+#logo {
+  margin-top: 5%;
+
+}
+
 #white-container {
     background: white;
     display: grid;
@@ -142,7 +147,7 @@ input {
 }
 
 #custom-tip:hover, #custom-tip:focus, #custom-tip:active {
-  border: 2px solid var(--primary-400) !important;
+  border: 2px solid var(--primary-400);
   outline: none;
 }
 
@@ -277,5 +282,5 @@ input {
     border: 2px solid var(--accent-100);
 }
 .attribution a { 
-    color: var(--primary-400);
+    color: var(--primary-200);
  }

@@ -19,6 +19,7 @@ const totalAmount = document.getElementById("variable-total-amount");
 // Setting initial values to display on load
 tipAmount.innerHTML = "$0.00";
 totalAmount.innerHTML = "$0.00";
+document.getElementById("num-people").value = 1;
 
 
 // Math.round rounds numbers to the nearest whole number. So to round to the nearest hundreths place I had to multiply the value by 100, then round it to the nearest whole number and then divide by 100 to shift the place values back to the hundreths place. 
@@ -28,8 +29,8 @@ function calculateTip()  {  // Calculates the tip per person
     numPeople = parseFloat(document.getElementById("num-people").value); // stores the most up to date value for numPeople
     if (custom === "true" && numPeople) { // checks if the user selected a custom tip
         customTipAmount = parseFloat(customTip.value); 
-         return Math.round(customTipAmount / numPeople*100)/100; // uses the tip as a $ amount not a percent
-        };
+         return customTipAmount / numPeople; // uses the tip as a $ amount not a percent
+     };
     if (total  && tipPercent && numPeople) { // Checks if all inputs are truthy
         return (total * (tipPercent / 100) / numPeople); // uses the tipPercent as a percent
     }
@@ -37,7 +38,8 @@ function calculateTip()  {  // Calculates the tip per person
 };
 
 function calculateTotal() { // Calculates the total per person
-    if ((total || tipPercent || customTipAmount) && numPeople) {
+    if ((total || (tipPercent && total) || customTipAmount) && numPeople) {
+        if (total == 0) { return calculateTip()};
         return ((total/numPeople) + calculateTip()); 
     }
     else return 0.00; // displays $0 if any inputs are falsey
@@ -141,7 +143,7 @@ document.getElementById("num-people").addEventListener("change", () => {
 // This resets all inputs and outputs when the reset button is clicked
 document.getElementById("reset").addEventListener("click", () => {
     document.getElementById("total").value = "0.00";
-    document.getElementById("num-people").value = "0";
+    document.getElementById("num-people").value = 1;
     document.querySelectorAll('.percent[selected="true"]')
     .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
     customTip.value = "";
