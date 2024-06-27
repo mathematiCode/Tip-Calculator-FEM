@@ -103,6 +103,12 @@ input {
   text-align: right;;
 }
 
+#dollar-icon, #person-icon {
+  position: fixed;
+  margin: 10px;
+}
+
+
 #percent-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));

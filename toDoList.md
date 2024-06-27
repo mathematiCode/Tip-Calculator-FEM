@@ -1,7 +1,7 @@
 - Set the default output values to $0.00 ✅
 - Prevent displaying Null or NaN. Done ✅
 - Set the default input values to 0. ✅
-- Place icons inside of the input boxes
+- Place icons inside of the input boxes ✅
 - Adjust styles for the custom tip button Done ✅
 - Make Reset button reset all inputs to 0/blank ✅
 - FIx padding issues on mobile view so padding is consistent on all sides. ✅
@@ -13,3 +13,4 @@
 - Set formatting of input boxes to dollars and cents.
 - Add comments ✅
 - Handle case where user deliberately inputs 0 into one of the boxes ✅
+- Make sure form is accessible for screen readers
