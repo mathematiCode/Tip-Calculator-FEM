@@ -109,7 +109,7 @@ input {
 }
 
 #dollar-icon, #person-icon {
-  position: fixed;
+  position: absolute;
   margin: 10px;
 }
 
