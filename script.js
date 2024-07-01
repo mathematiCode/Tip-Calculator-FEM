@@ -7,10 +7,15 @@ const fifteenPercent = document.getElementById("15-percent");
 const twentyPercent = document.getElementById("20-percent");
 const twentyFivePercent = document.getElementById("25-percent");
 const customTip = document.getElementById("custom-tip");
+const customDollarSign = document.getElementById("custom-dollar-sign");
+const numPeopleError = document.getElementById("num-people-error");
+const totalError = document.getElementById("total-error");
 let numPeople = parseFloat(document.getElementById("num-people").value);
 
 let tipPercent; 
-let custom = "false";
+let custom = false;
+let isPossible = true;
+let customTipAmount;
 
 // html elements to display info to the user 
 const tipAmount = document.getElementById("variable-tip-amount");
@@ -61,6 +66,7 @@ tenPercent.addEventListener("click", () => {
     document.querySelectorAll('.percent[selected="true"]')
     .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
     customTip.value = "";
+    customDollarSign.style.display = "none";
     tenPercent.setAttribute("selected", "true");
     tipPercent = 10;
     custom = "false";
@@ -72,6 +78,7 @@ fifteenPercent.addEventListener("click", () => {
     document.querySelectorAll('.percent[selected="true"]')
     .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
     customTip.value = "";
+    customDollarSign.style.display = "none";
     fifteenPercent.setAttribute("selected", "true");
     tipPercent = 15;
     custom = "false";
@@ -83,6 +90,7 @@ twentyPercent.addEventListener("click", () => {
     document.querySelectorAll('.percent[selected="true"]')
     .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
     customTip.value = "";
+    customDollarSign.style.display = "none";
     twentyPercent.setAttribute("selected", "true");
     tipPercent = 20;
     custom = "false";
@@ -94,6 +102,7 @@ twentyFivePercent.addEventListener("click", () => {
     document.querySelectorAll('.percent[selected="true"]')
     .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
     customTip.value = "";
+    customDollarSign.style.display = "none";
     twentyFivePercent.setAttribute("selected", "true");
     tipPercent = 25;
     custom = "false";
@@ -117,9 +126,15 @@ customTip.addEventListener("click", () => {
     document.querySelectorAll('.percent[selected="true"]')
     .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
     customTip.setAttribute("selected","true");
+    customDollarSign.style.display = "block";
 });
 
 customTip.addEventListener("change", () => {
+    if (customTip.value < 0) { 
+
+    };
+
+    
     custom = "true"; // Ensures that the value stored is used as a $ amount not a percent 
     customTipAmount = parseFloat(customTip.value); // stores tip amount the user input
     tipAmount.innerHTML = "$" + (calculateTip().toFixed(2)); // Updates the tip amount
@@ -129,14 +144,26 @@ customTip.addEventListener("change", () => {
 
 // These event listeners update outputs when any input is changed 
 
-document.getElementById("total").addEventListener("change", () => {
+document.getElementById("total").addEventListener("input", () => {
+    total = parseFloat(document.getElementById("total").value);
+    if (total < 0) { totalError.innerHTML = "Can't be negative"; }
+    else if (total == 0)  { totalError.innerHTML = "Can't be 0"; }
+    else {
+    totalError.innerHTML = "";
     tipAmount.innerHTML = "$" + (calculateTip().toFixed(2)); // Updates the tip amount
     totalAmount.innerHTML = "$" + (calculateTotal().toFixed(2)); //Updates the total amount
+    }
 });
 
-document.getElementById("num-people").addEventListener("change", () => {
+document.getElementById("num-people").addEventListener("input", () => {
+    numPeople = parseFloat(document.getElementById("num-people").value);
+    if (numPeople < 0 ) {  numPeopleError.innerHTML = "Can't be negative"; }
+   else if (numPeople == 0 ) {  numPeopleError.innerHTML = "Can't be 0"; }
+   else {
+    numPeopleError.innerHTML = "";
     tipAmount.innerHTML = "$" + (calculateTip().toFixed(2)); // Updates the tip amount
     totalAmount.innerHTML = "$" + (calculateTotal().toFixed(2)); //Updates the total amount
+   }
 });
 
 
@@ -150,3 +177,9 @@ document.getElementById("reset").addEventListener("click", () => {
     tipAmount.innerHTML = "$0.00";
     totalAmount.innerHTML = "$0.00";
 });
+
+
+// while (numPeople < 0) {
+//     numPeopleError.innerHTML = "Can't be negative";
+//     isPossible = false;
+// }

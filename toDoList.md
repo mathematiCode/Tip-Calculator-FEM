@@ -9,9 +9,11 @@
 - Add rounding in the case that a custom tip is selected ✅
 - Add comments ✅
 - Handle case where user deliberately inputs 0 into one of the boxes ✅
-- Fix positioning of icons
+- Fix positioning of icons ✅
 - Prevent NaN, Infinity from being output.
 - Set formatting of input boxes to dollars and cents.
 - Format custom tip button in dollars and cents
 - Prevent negative values and non-numbers
+- Add aria-labels
+- Make sure it can be filled out without a mouse
 - Make sure form is accessible for screen readers

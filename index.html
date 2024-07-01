@@ -27,9 +27,10 @@
       <div id="inputs">
         <div id="bill">
           <div class="title">Bill</div>
+          <div id="total-error" class="error-message"></div>
           <img
             src="./images/icon-dollar.svg"
-            id="dollar-icon"
+            class="dollar-icon"
             alt="dollar sign"
           />
           <input
@@ -49,13 +50,23 @@
             <button class="percent" id="15-percent">15%</button>
             <button class="percent" id="20-percent">20%</button>
             <button class="percent" id="25-percent">25%</button>
-            <input class="percent" label="Custom" id="custom-tip" />
+
+            <div class="custom-tip-container">
+              <img
+                id="custom-dollar-sign"
+                src="./images/icon-dollar.svg"
+                class="dollar-icon"
+                alt="dollar sign"
+              />
+              <input label="Custom" class="percent" id="custom-tip" />
+            </div>
           </div>
         </div>
 
         <div id="number-of-people">
           <div class="title">Number of People</div>
-          <img src="./images/icon-person.svg" alt="" id="person-icon" />
+          <div id="num-people-error" class="error-message"></div>
+          <img src="./images/icon-person.svg" alt="" class="person-icon" />
           <input type="number" id="num-people" placeholder="0" />
         </div>
       </div>

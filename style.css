@@ -108,7 +108,7 @@ input {
   text-align: right;;
 }
 
-#dollar-icon, #person-icon {
+.dollar-icon, .person-icon {
   position: absolute;
   margin: 10px;
 }
@@ -150,6 +150,25 @@ input {
   border: 2px solid var(--primary-400);
   outline: none;
 }
+
+#custom-dollar-sign {
+  display: none;
+}
+
+#number-of-people, #bill {
+  position: relative;
+}
+
+.error-message {
+  color: rgb(226, 88, 88);
+  font-size: 0.45rem;
+  position: absolute;
+  right: 0px;
+  margin-right: 0px;
+  top: 3px;
+  width: 18ch;
+}
+
 
 
 #outputs {
