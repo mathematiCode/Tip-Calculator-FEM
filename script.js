@@ -33,7 +33,8 @@ document.getElementById("num-people").value = 1;
 function calculateTip()  {  // Calculates the tip per person
     total = parseFloat(document.getElementById("total").value); // stores most up to date value for the total bill
     numPeople = parseFloat(document.getElementById("num-people").value); // stores the most up to date value for numPeople
-    if (isPossible == false) { calculationError.style.display = "block"};
+    if (isPossible == false) { calculationError.style.display = "block"}
+    else { calculationError.style.display = "none"};
     if (custom === "true" && numPeople>0) { // checks if the user selected a custom tip
         customTipAmount = parseFloat(customTip.value); 
          return customTipAmount / numPeople; // uses the tip as a $ amount not a percent
@@ -132,15 +133,18 @@ customTip.addEventListener("click", () => {
 });
 
 customTip.addEventListener("change", () => {
-    if (customTip.value < 0) { 
-
-    };
-
-    
-    custom = "true"; // Ensures that the value stored is used as a $ amount not a percent 
     customTipAmount = parseFloat(customTip.value); // stores tip amount the user input
-    tipAmount.innerHTML = "$" + (calculateTip().toFixed(2)); // Updates the tip amount
-    totalAmount.innerHTML = "$" + (calculateTotal().toFixed(2)); //Updates the total amount
+    if  (customTip.value < 0) { 
+        isPossible = false;
+        calculationError.style.display = "block"
+        return; 
+    }
+    else {
+        custom = "true"; // Ensures that the value stored is used as a $ amount not a percent 
+        isPossible = true; 
+        tipAmount.innerHTML = "$" + (calculateTip().toFixed(2)); // Updates the tip amount
+        totalAmount.innerHTML = "$" + (calculateTotal().toFixed(2)); //Updates the total amount
+    }
 });
 
 
@@ -151,9 +155,11 @@ document.getElementById("total").addEventListener("input", () => {
     if (total < 0) { 
         totalError.innerHTML = "Can't be negative";
         isPossible = false;
+        calculationError.style.display = "block";
     }
     else {
      isPossible = true;
+     calculationError.style.display = "none";
     totalError.innerHTML = "";
     tipAmount.innerHTML = "$" + (calculateTip().toFixed(2)); // Updates the tip amount
     totalAmount.innerHTML = "$" + (calculateTotal().toFixed(2)); //Updates the total amount
@@ -165,11 +171,12 @@ document.getElementById("num-people").addEventListener("input", () => {
     if (numPeople < 0 ) {  
         numPeopleError.innerHTML = "Can't be negative"; 
         isPossible = false;
-    
+        calculationError.style.display = "block";
     }
-   else if (numPeople == 0 ) {  
+   else if (numPeople == 0 ) { 
     numPeopleError.innerHTML = "Can't be 0";
     isPossible = false;
+    calculationError.style.display = "block";
 
     }
    else {
