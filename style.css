@@ -84,7 +84,7 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
     /* margin-top: max(20vh, 90px); */
-    height: fit-content;
+    min-height: fit-content;
     width: min(700px, 90%);
     min-width: fit-content;
     border-radius: 3%;
