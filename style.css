@@ -19,6 +19,11 @@
   body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    display: flex;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
   /*
     5. Improve media defaults
@@ -65,21 +70,20 @@
 body {
     background: var(--accent-200);
     display: flex;
-    position: relative;
     justify-content: center;
+    align-items: center;
+    gap: 15px;
 }
 
 #logo {
-  margin-top: 5%;
-
+  
 }
 
 #white-container {
     background: white;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
-    position: absolute;
-    margin-top: 20vh;
+    /* margin-top: max(20vh, 90px); */
     height: fit-content;
     width: min(700px, 90%);
     min-width: fit-content;
@@ -89,7 +93,7 @@ body {
 
 @media (max-width: 400px) {
   #white-container {
-    margin-top: 90px;
+    /* margin-top: 90px; */
   }
 }
 
@@ -112,7 +116,7 @@ input {
   border: none;
   border-radius: 5px;
   color: var(--primary-800);
-  text-align: right;;
+  text-align: right;
 }
 
 .dollar-icon, .person-icon {
