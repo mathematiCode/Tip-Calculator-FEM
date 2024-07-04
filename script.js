@@ -28,7 +28,6 @@ totalAmount.innerHTML = "$0.00";
 document.getElementById("num-people").value = 1;
 
 
-// Math.round rounds numbers to the nearest whole number. So to round to the nearest hundreths place I had to multiply the value by 100, then round it to the nearest whole number and then divide by 100 to shift the place values back to the hundreths place. 
 
 function calculateTip()  {  // Calculates the tip per person
     total = parseFloat(document.getElementById("total").value); // stores most up to date value for the total bill
@@ -55,6 +54,7 @@ function calculateTotal() { // Calculates the total per person
 
 // Event listeners that ensure that only one tip percent is selected at a time and updates the tip and total 
 fivePercent.addEventListener("click", () => {
+    isPossible = true; 
     document.querySelectorAll('.percent[selected="true"]')
     .forEach((currentItem) => currentItem.setAttribute("selected", "false")); // Reverts formatting for all %'s 
     customTip.value = ""; // Clears custom input field
@@ -113,33 +113,34 @@ twentyFivePercent.addEventListener("click", () => {
     totalAmount.innerHTML = "$" + (calculateTotal().toFixed(2)); //Updates the total amount
 });
 
-customTip.addEventListener("change", () => {
-    document.querySelectorAll('.percent[selected="true"]')
-    .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
-    customTip.setAttribute("selected","true");
-    custom = "true";
-    customTipAmount = parseFloat(customTip.value);
-    console.log("Custom TIp is " + customTipAmount);
-    tipAmount.innerHTML = "$" + (calculateTip().toFixed(2)); // Updates the tip amount
-    totalAmount.innerHTML = "$" + (calculateTotal().toFixed(2)); //Updates the total amount
-});
+// customTip.addEventListener("input", () => {
+//     document.querySelectorAll('.percent[selected="true"]')
+//     .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
+//     customTip.setAttribute("selected","true");
+//     custom = "true";
+//     customTipAmount = parseFloat(customTip.value);
+//     console.log("Custom TIp is " + customTipAmount);
+//     tipAmount.innerHTML = "$" + (calculateTip().toFixed(2)); // Updates the tip amount
+//     totalAmount.innerHTML = "$" + (calculateTotal().toFixed(2)); //Updates the total amount
+// });
 
 
-customTip.addEventListener("click", () => {
+customTip.addEventListener("click", () => {  // deselects all percent buttons and selects custom button
     document.querySelectorAll('.percent[selected="true"]')
     .forEach((currentItem) => currentItem.setAttribute("selected", "false"));
     customTip.setAttribute("selected","true");
     customDollarSign.style.display = "block";
 });
 
-customTip.addEventListener("change", () => {
+customTip.addEventListener("input", () => {
     customTipAmount = parseFloat(customTip.value); // stores tip amount the user input
     if  (customTip.value < 0) { 
         isPossible = false;
-        calculationError.style.display = "block"
+        calculationError.style.display = "block";
         return; 
     }
     else {
+        calculationError.style.display = "block";
         custom = "true"; // Ensures that the value stored is used as a $ amount not a percent 
         isPossible = true; 
         tipAmount.innerHTML = "$" + (calculateTip().toFixed(2)); // Updates the tip amount
@@ -179,11 +180,16 @@ document.getElementById("num-people").addEventListener("input", () => {
     calculationError.style.display = "block";
 
     }
-   else {
+   else  if (numPeople % 1  == 0) { 
     isPossible = true;
     numPeopleError.innerHTML = "";
+    calculationError.style.display = "none";
     tipAmount.innerHTML = "$" + (calculateTip().toFixed(2)); // Updates the tip amount
     totalAmount.innerHTML = "$" + (calculateTotal().toFixed(2)); //Updates the total amount
+   }
+   else if (numPeople % 1 > 0) { // Checks if it is a decimal with by checking for a non-zero remainder. 
+    numPeopleError.innerHTML = "Must be a whole number"; 
+    calculationError.style.display = "block";
    }
 });
 

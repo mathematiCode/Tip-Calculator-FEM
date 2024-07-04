@@ -68,6 +68,7 @@
     font-weight: 700;
     font-size: 24px;
 }
+
 body {
     background: var(--accent-200);
     display: flex;
@@ -78,7 +79,7 @@ body {
 }
 
 #logo {
- margin-top: max(12%,20px);
+ margin-top: max(8%,20px);
 }
 
 #white-container {
@@ -132,26 +133,28 @@ input {
 .percent {
   background-color: var(--primary-800);
   color: white;
-  border: none;
+  border: 2px solid transparent;
   border-radius: 5px;
-  padding: 5px;
+  padding: 2px;
   cursor: pointer;
 }
 
 .percent:hover, .percent:focus {
   background-color: var(--primary-200);
   color: var(--primary-800);
+  border: 2px solid transparent;
 }
 
 .percent[selected="true"] {
   background-color: var(--primary-200);
   color: var(--primary-800);
+  border: 2px solid transparent;
 }
 
 #custom-tip {
   background: var(--accent-100);
   color: var(--primary-800);
-  border: none;
+  border: 2px solid transparent;
 }
 
 #custom-tip:hover, #custom-tip:focus, #custom-tip:active {
@@ -187,6 +190,12 @@ input {
     align-self: center;
     position: relative;
     grid-template-rows: 1fr 1fr 1fr 2fr 1fr;
+}
+
+@media (max-width: 777px) {
+  #outputs {
+  grid-template-rows: 1fr 1fr 1fr 20px 1fr;
+}
 }
 
 #calculation-error-message {
