@@ -20,10 +20,11 @@
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     display: flex;
-    height: 100vh;
+    height: 100%;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    overflow: auto;
   }
   /*
     5. Improve media defaults
@@ -73,10 +74,11 @@ body {
     justify-content: center;
     align-items: center;
     gap: 15px;
+    overflow: auto;
 }
 
 #logo {
-  margin-top: 25px;
+ margin-top: max(12%,20px);
 }
 
 #white-container {
@@ -90,11 +92,6 @@ body {
     place-items: center;
 }
 
-@media (max-width: 400px) {
-  #white-container {
-    /* margin-top: 90px; */
-  }
-}
 
 #inputs, #outputs {
     width: 90%;
