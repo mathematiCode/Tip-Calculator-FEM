@@ -15,10 +15,13 @@
 - Set formatting of input boxes to dollars and cents.
 - Format custom tip button in dollars and cents
 - Make sure numPeople is a whole number ✅
-- Limit total bill to $999,999.
+- Limit total bill to $999,999. ✅
+
 - If a negative custom tip is entered but then a percent tip is selected, fix error message
+- If a negative custom tip is entered but then a positive total bill is entered, display the error message
 - Fix total display when only a custom tip is entered, no total bill so it doesn't display NaN
 - Fix or delete the isPossible variables
+
 - Add aria-labels
 - Make sure it can be filled out without a mouse
 - Make sure form is accessible for screen readers

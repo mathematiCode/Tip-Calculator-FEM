@@ -158,6 +158,11 @@ document.getElementById("total").addEventListener("input", () => {
         isPossible = false;
         calculationError.style.display = "block";
     }
+    else if (total > 999999) {
+        totalError.innerHTML = "Must be less than 1 million";
+        calculationError.style.display = "block";
+    }
+    
     else {
      isPossible = true;
      calculationError.style.display = "none";
