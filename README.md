@@ -1,0 +1,1 @@
+This was one of the hardest projects I did in Vanilla Javascript. Having to figure out when to trigger a form submission without a submit button and check if all inputs were filled in correctly without something like React to handle the flow of state was a big challenge. It helped me appreciate what React does for us. 
